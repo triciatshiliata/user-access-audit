@@ -80,4 +80,18 @@ def check_admin_count(users, max_ratio=0.10):
             "admins": [...],      # sorted list of admin emails
         }
     """
-   
+    active = active_only(users)
+    admin = active[active["is_admin"]] 
+    
+    user_report = {"admin_count": len(admin), "active_count": len(active)}
+    initial_ratio = len(admin) / len(active) if len(active) > 0 else 0
+    ratio = round(initial_ratio, 2)
+    user_report["ratio"] = ratio
+    
+    too_many = initial_ratio > max_ratio
+    user_report["too_many"] = too_many
+
+    admin_emails = admin["email"]
+    user_report["admins"] = sorted(admin_emails)
+
+    return user_report

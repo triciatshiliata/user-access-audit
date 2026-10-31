@@ -31,9 +31,9 @@ pytest
 
 - [x] Load and clean the user export and HR roster
 - [x] Check: inactive accounts
-- [ ] Check: accounts without MFA
-- [ ] Check: accounts of people who left
-- [ ] Check: admin count
+- [x] Check: accounts without MFA
+- [x] Check: accounts of people who left
+- [x] Check: admin count
 - [ ] Web app: upload CSVs, see results on a dashboard, download the report
 - [ ] GitHub Actions: run tests on every push
 - [ ] Deploy with a public link
