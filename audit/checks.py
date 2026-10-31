@@ -57,7 +57,12 @@ def find_orphaned_accounts(users, roster):
     - pandas .isin() checks whether each value is in a list:
           df["email"].isin(some_list)
     """
-    raise NotImplementedError
+    roster_emails = roster["email"].str.strip().str.lower()
+    active = active_only(users)
+    active_email = active["email"].str.strip().str.lower()
+    active_not_in_roster = active_email[~active_email.isin(roster_emails)]
+    
+    return sorted(active_not_in_roster)
 
 
 # ---------------------------------------------------------------------------
@@ -75,4 +80,4 @@ def check_admin_count(users, max_ratio=0.10):
             "admins": [...],      # sorted list of admin emails
         }
     """
-    raise NotImplementedError
+   
