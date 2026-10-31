@@ -42,9 +42,8 @@ def find_users_without_mfa(users):
     Hint: start from active_only(users), then filter on the mfa_enrolled column.
     The ~ operator flips True/False in pandas:  df[~df["col"]]
     """
-    raise NotImplementedError
-
-
+    active = active_only(users)
+    return sorted(active[~active["mfa_enrolled"]]["email"])
 # ---------------------------------------------------------------------------
 # Check 3 - YOUR TURN
 # ---------------------------------------------------------------------------
