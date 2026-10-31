@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Access Audit</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>User Access Audit</h1>
+    <p>Upload a Google Workspace or Microsoft 365 user export and your HR roster to find risky accounts.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <form id="upload-form">
+        <label>User export (CSV)
+          <input type="file" name="users" accept=".csv" required>
+        </label>
+        <label>HR roster (CSV)
+          <input type="file" name="roster" accept=".csv" required>
+        </label>
+        <div class="buttons">
+          <button type="submit">Run audit</button>
+          <button type="button" id="sample-button" class="secondary">Try it with sample data</button>
+        </div>
+      </form>
+      <p id="error" class="error" hidden></p>
+    </section>
+
+    <section id="results" hidden>
+      <div class="summary">
+        <div class="stat"><span id="total-accounts">0</span>accounts</div>
+        <div class="stat"><span id="active-accounts">0</span>active</div>
+        <div class="stat warn"><span id="issue-count">0</span>with issues</div>
+        <div class="stat" id="admin-stat"><span id="admin-ratio">0%</span>admins</div>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <h2>Inactive 90+ days</h2>
+          <ul id="inactive-list"></ul>
+        </article>
+        <article class="card">
+          <h2>No MFA</h2>
+          <ul id="no-mfa-list"></ul>
+        </article>
+        <article class="card">
+          <h2>People who left</h2>
+          <ul id="orphaned-list"></ul>
+        </article>
+        <article class="card">
+          <h2>Admins</h2>
+          <ul id="admins-list"></ul>
+        </article>
+      </div>
+
+      <p class="meta">Audit date: <span id="audit-date"></span></p>
+      <button id="download-button" class="secondary">Download report (CSV)</button>
+    </section>
+  </main>
+
+  <footer>Built by Patricia Tshiliata · Python, Flask, pandas, JavaScript</footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
